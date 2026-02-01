@@ -1,7 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
+
+console.log("[v0] LogoUploader module loaded");
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,8 +18,13 @@ interface LogoUploaderProps {
 export function LogoUploader({ logos, onLogosChange, maxLogos = 4 }: LogoUploaderProps) {
   const [dragOver, setDragOver] = useState(false);
 
+  useEffect(() => {
+    console.log("[v0] LogoUploader rendered with", logos.length, "logos");
+  }, [logos]);
+
   const handleFileUpload = useCallback(
     async (files: FileList | null) => {
+      console.log("[v0] handleFileUpload called with", files?.length, "files");
       if (!files) return;
 
       const newLogos: Logo[] = [];

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { LogoUploader } from "@/components/logo-uploader";
 import { MorphControls } from "@/components/morph-controls";
 import { MorphPreview, type MorphPreviewHandle } from "@/components/morph-preview";
@@ -10,11 +10,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Droplets, Settings, Upload, Film } from "lucide-react";
 
+console.log("[v0] MorphAnimator module loaded");
+
 export default function MorphAnimator() {
   const [logos, setLogos] = useState<Logo[]>([]);
   const [settings, setSettings] = useState<MorphSettings>(defaultSettings);
   const [backgroundColor, setBackgroundColor] = useState("#111318");
   const previewRef = useRef<MorphPreviewHandle>(null);
+
+  useEffect(() => {
+    console.log("[v0] MorphAnimator rendered, logos:", logos.length);
+  }, [logos]);
 
   return (
     <div className="min-h-screen bg-background">
